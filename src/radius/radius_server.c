@@ -388,7 +388,7 @@ void srv_log(struct radius_session *sess, const char *fmt, ...)
 				      "(timestamp,session,nas_ip,username,note)"
 				      " VALUES ("
 				      "strftime('%%Y-%%m-%%d %%H:%%M:%%f',"
-				      "'now'),%u,%Q,%Q,%Q)",
+				      "'now', 'localtime'),%u,%Q,%Q,%Q)",
 				      sess->sess_id, sess->nas_ip,
 				      sess->username, buf);
 		if (sql) {
