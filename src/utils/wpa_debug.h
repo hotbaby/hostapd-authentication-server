@@ -10,6 +10,7 @@
 #define WPA_DEBUG_H
 
 #include "wpabuf.h"
+#include "glog_debug.h"
 
 extern int wpa_debug_level;
 extern int wpa_debug_show_keys;
@@ -19,7 +20,7 @@ extern int wpa_debug_timestamp;
  * use these for debugging purposes. */
 
 enum {
-	MSG_EXCESSIVE, MSG_MSGDUMP, MSG_DEBUG, MSG_INFO, MSG_WARNING, MSG_ERROR
+	MSG_EXCESSIVE=0, MSG_MSGDUMP=0, MSG_DEBUG=0, MSG_INFO=0, MSG_WARNING, MSG_ERROR
 };
 
 #ifdef CONFIG_NO_STDOUT_DEBUG
@@ -69,8 +70,11 @@ void wpa_debug_print_timestamp(void);
  *
  * Note: New line '\n' is added to the end of the text when printing to stdout.
  */
-void wpa_printf(int level, const char *fmt, ...)
-PRINTF_FORMAT(2, 3);
+#define wpa_printf(level, fmt, ...) \
+	glog_debug(level, __FILE__, __LINE__, fmt, ##__VA_ARGS__)
+
+//void wpa_printf(int level, const char *fmt, ...)
+//PRINTF_FORMAT(2, 3);
 
 /**
  * wpa_hexdump - conditional hex dump

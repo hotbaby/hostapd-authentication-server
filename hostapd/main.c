@@ -15,6 +15,7 @@
 #include "utils/common.h"
 #include "utils/eloop.h"
 #include "utils/uuid.h"
+#include "utils/glog_debug.h"
 #include "crypto/random.h"
 #include "crypto/tls.h"
 #include "common/version.h"
@@ -658,6 +659,8 @@ int main(int argc, char *argv[])
 	    num_bss_configs == 0)
 		usage();
 
+
+	glog_init(argv[0], NULL);
 	wpa_msg_register_ifname_cb(hostapd_msg_ifname_cb);
 
 	if (log_file)
@@ -800,6 +803,7 @@ int main(int argc, char *argv[])
 	fst_global_deinit();
 
 	os_program_deinit();
+	glog_deinit();
 
 	return ret;
 }
