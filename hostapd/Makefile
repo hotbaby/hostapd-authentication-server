@@ -939,7 +939,7 @@ OBJS += ../src/fst/fst_ctrl_iface.o
 endif
 endif
 
-ALL=hostapd hostapd_cli
+ALL=hostapd_radius_server hostapd_cli
 
 all: verify_config $(ALL)
 
@@ -986,8 +986,8 @@ install: $(addprefix $(DESTDIR)$(BINDIR)/,$(ALL))
 
 BCHECK=../src/drivers/build.hostapd
 
-hostapd: $(BCHECK) $(OBJS)
-	$(Q)g++ $(LDFLAGS) -o hostapd $(OBJS) $(LIBS)
+hostapd_radius_server: $(BCHECK) $(OBJS)
+	$(Q)g++ $(LDFLAGS) -o hostapd_radius_server $(OBJS) $(LIBS)
 	@$(E) "  LD " $@
 
 ifdef CONFIG_WPA_TRACE
@@ -1041,7 +1041,7 @@ lcov-html:
 
 clean:
 	$(MAKE) -C ../src clean
-	rm -f core *~ *.o hostapd hostapd_cli nt_password_hash hlr_auc_gw
+	rm -f core *~ *.o hostapd_radius_server hostapd_cli nt_password_hash hlr_auc_gw
 	rm -f *.d *.gcno *.gcda *.gcov
 	rm -f lcov.info
 	rm -rf lcov-html
