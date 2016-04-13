@@ -660,7 +660,7 @@ int main(int argc, char *argv[])
 		usage();
 
 
-	glog_init(argv[0], NULL);
+	glog_init(argv[0], "/home/yy/Data/log/hostapd/authentication_server/");
 	wpa_msg_register_ifname_cb(hostapd_msg_ifname_cb);
 
 	if (log_file)
